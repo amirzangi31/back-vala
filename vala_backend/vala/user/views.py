@@ -34,18 +34,27 @@ class UserDetail(APIView):
             return user.objects.get(pk=pk)
         except user.DoesNotExist:
             raise http.Http404
+    def get_object_delete(self,pk):
+        try:   
+            return user.objects.filter(pk=pk)
+        except user.DoesNotExist:
+            raise http.Http404
     def get(self,request,pk):
         queryset=self.get_object(pk)   
         serializer = UserSerializer(queryset)
         return Response(serializer.data)
 
-    def put(self,request,pk, format=None):
+    def patch(self,request,pk, format=None):
         queryset = self.get_object(pk2)
-        serializer = UserSerializer(queryset, data=request.data)
+        serializer = UserSerializer(queryset, data=request.dataو,partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object_delete(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 class UserUser(APIView):
 
     def get_object(self,user):
