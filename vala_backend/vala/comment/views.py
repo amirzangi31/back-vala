@@ -31,6 +31,11 @@ class CommentDetail(APIView):
             return comment.objects.get(pk=pk)
         except comment.DoesNotExist:
             raise http.Http404
+    def get_object_delete(self,pk):
+        try:   
+            return comment.objects.filter(pk=pk)
+        except comment.DoesNotExist:
+            raise http.Http404
     def get(self,request,pk):
         queryset=self.get_object(pk)   
         serializer = GetCommentSerializer(queryset)
