@@ -17,7 +17,8 @@ urlpatterns = [
     path('ticket/',include('ticket.urls')),
     path('user/',include('user.urls')),
     path('program/',include('program.urls')),
-    path('reserve',include('reserve.urls')),
+    path('reserve/',include('reserve.urls')),
+    path('cortex/',include('cortex.urls')),
     
 ]
 urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

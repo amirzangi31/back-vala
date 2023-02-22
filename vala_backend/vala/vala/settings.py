@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'user',
     'program',
     'reserve',
+    'cortex',
 ]
 
 MIDDLEWARE = [
